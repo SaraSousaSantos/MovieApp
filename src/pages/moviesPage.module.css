@@ -1,0 +1,16 @@
+.popularMovies {
+  display:flex;
+  flex-wrap: wrap;
+  gap:1rem;
+}
+
+.sectionTitle {
+  margin: 0 0 0 4.5rem;
+}
+
+.popularMoviesCards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
