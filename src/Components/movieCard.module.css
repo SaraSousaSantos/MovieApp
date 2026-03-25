@@ -1,9 +1,0 @@
-.poster {
-  border-radius: 12px;
-}
-.movieCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}

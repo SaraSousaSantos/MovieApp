@@ -1,0 +1,23 @@
+.movieCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 12rem;
+}
+
+.poster {
+  border-radius: 12px;
+  max-width: 12rem;
+}
+
+.title {
+  text-align: center;
+  font-size: 0.7rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.starRating {
+  font-size: 0.9rem;
+}

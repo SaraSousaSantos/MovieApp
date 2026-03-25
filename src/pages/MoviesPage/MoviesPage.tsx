@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import type { Imovie } from "../types/movie";
-import options from "../helpers";
-import MovieCard from "../Components/MovieCard";
-import styles from "./moviesPage.module.css"
+import type { Imovie } from "../../types/movie";
+import options from "../../helpers";
+import styles from "./moviesPage.module.css";
+import MovieCard from "../../Components/MovieCard/MovieCard";
+import NavBar from "../../Components/NavBar/NavBar";
+import { Link } from "react-router-dom";
 
 function MoviesPage() {
   const [movies, setMovies] = useState<Imovie[]>([]);
@@ -23,16 +25,22 @@ function MoviesPage() {
 
   return (
     <>
+      <NavBar />
+
       <section className={styles.popularMovies}>
-        <h2 className={styles.sectionTitle}>Popular Movies</h2>
+        <h1 className={styles.sectionTitle}>Popular Movies</h1>
         <div className={styles.popularMoviesCards}>
           {movies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              image={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
-              title={movie.title}
-              rating={movie.vote_average}
-            ></MovieCard>
+            <Link to="/Details">
+              <button className={styles.detaisButton}>
+                <MovieCard
+                  key={movie.id}
+                  image={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                  title={movie.title}
+                  rating={movie.vote_average}
+                ></MovieCard>
+              </button>
+            </Link>
           ))}
         </div>
       </section>

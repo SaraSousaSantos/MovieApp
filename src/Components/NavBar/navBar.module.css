@@ -1,0 +1,36 @@
+.navBar {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+}
+
+.user {
+  display: flex;
+}
+
+.avatar {
+  width: 6.25rem;
+}
+
+.userText {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.searchBar {
+  position: relative;
+}
+
+.search {
+  background-color: #15151f;
+  border: 1px solid #15151f;
+  border-radius: 4px;
+  width: 100%;
+  height: 2rem;
+  color: rgb(255, 255, 255);
+}
+
+.icon {
+  position: absolute;
+}

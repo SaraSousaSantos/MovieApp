@@ -11,9 +11,8 @@ function MovieCard({ image, title, rating }: MovieCardProps) {
   return (
     <div className={styles.movieCard}>
       <img className={styles.poster} src={image} alt={title} />
-      <p>{title}</p>
-
-      <span>{"⭐".repeat(stars)}</span>
+      <p className={styles.title}>{title}</p>
+      <span className={styles.starRating}>{"⭐".repeat(stars)}</span>
     </div>
   );
 }
