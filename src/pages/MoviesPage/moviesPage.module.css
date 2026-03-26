@@ -1,10 +1,12 @@
 .popularMovies {
-  margin: 2rem;
+  padding: 1rem;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .sectionTitle {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  padding: 1rem 1.4rem;
 }
 
 .popularMoviesCards {
@@ -12,9 +14,5 @@
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: flex-start;
-}
-
-
-.detailsButton{
-  background-color: aquamarine;
+  padding: 1rem;
 }
