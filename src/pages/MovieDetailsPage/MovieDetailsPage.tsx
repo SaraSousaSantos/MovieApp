@@ -3,6 +3,7 @@ import type { Imovie } from "../../types/movie";
 import options from "../../helpers";
 import { useParams } from "react-router-dom";
 import MovieDetails from "../../Components/MovieDetails/MovieDetails";
+import GetCast from "../../Components/Cast/GetCast";
 
 function MovieDetailsPage() {
   const { movie_id } = useParams();
@@ -25,15 +26,20 @@ function MovieDetailsPage() {
   }, [movie_id]);
 
   return (
-    <MovieDetails
-      key={movie?.id}
-      backdrop={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
-      image={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
-      title={movie?.title}
-      overview={movie?.overview}
-      adult={movie?.adult}
-      rating={movie?.vote_average}
-    ></MovieDetails>
+    <>
+      <MovieDetails
+        key={movie?.id}
+        backdrop={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
+        image={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
+        title={movie?.title}
+        overview={movie?.overview}
+        adult={movie?.adult}
+        genres={movie?.genres}
+        rating={movie?.vote_average}
+      ></MovieDetails>
+
+      <GetCast/>
+    </>
   );
 }
 

@@ -5,6 +5,7 @@ import TvSeriesPage from "./pages/TvSeriesPage/TvSeriesPage";
 import MovieDetailsPage from "./pages/MovieDetailsPage/MovieDetailsPage";
 import NavBar from "./Components/NavBar/NavBar";
 
+
 function App() {
   return (
     <>

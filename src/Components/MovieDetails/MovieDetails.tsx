@@ -6,8 +6,14 @@ type MovieDetailsProps = {
   image: string | undefined;
   title: string | undefined;
   adult: boolean | undefined;
+  genres: genre[] | undefined;
   rating: number | undefined;
   overview: string | undefined;
+};
+
+type genre = {
+  id: number;
+  name: string;
 };
 
 function MovieDetails({
@@ -15,7 +21,9 @@ function MovieDetails({
   image,
   title,
   adult,
+  genres,
   rating,
+
   overview,
 }: MovieDetailsProps) {
   return (
@@ -25,14 +33,22 @@ function MovieDetails({
 
         <div className={styles.overlayContent}>
           <img className={styles.poster} src={image} alt={title} />
-          <p className={styles.title}>{title}</p>
+          <h1 className={styles.title}>{title}</h1>
         </div>
       </div>
 
       <div className={styles.details}>
+        <div className={styles.chips}>
         {adult && <Chip variant="primary" label="+18" />}
+        
+        {genres?.map((genre) => (
+          <Chip key={genre.id} variant="primary">
+            {genre.name}
+          </Chip>
+        ))}
         <Chip variant="primary">⭐ {rating?.toFixed(1)}</Chip>
-
+        </div>
+        <h1>Overview</h1>
         <p>{overview}</p>
       </div>
     </>

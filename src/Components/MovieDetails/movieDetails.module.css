@@ -28,8 +28,17 @@
 
 .title {
   margin-top: auto;
+  font-size: 2rem;
 }
 
 .details {
+  display: flex;
+  flex-direction: column;
   padding: 2rem;
+  gap: 1rem;
+}
+
+.chips {
+  display: flex;
+  gap: 1rem;
 }
