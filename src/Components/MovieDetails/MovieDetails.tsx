@@ -48,8 +48,9 @@ function MovieDetails({
         ))}
         <Chip variant="primary">⭐ {rating?.toFixed(1)}</Chip>
         </div>
-        <h1>Overview</h1>
-        <p>{overview}</p>
+
+        <h1 className={styles.title}>Overview</h1>
+        <p className={styles.text}>{overview}</p>
       </div>
     </>
   );

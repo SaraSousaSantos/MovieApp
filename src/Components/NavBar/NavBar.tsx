@@ -7,13 +7,6 @@ import { Link } from "react-router-dom";
 function NavBar() {
   return (
     <div className={styles.navBar}>
-      {/* <div className={styles.user}>
-        <img src={avatar} className={styles.avatar} alt="avatar" />
-        <div className={styles.userText}>
-          <p>Welcome Back</p>
-          <p>User</p>
-        </div> */}
-
       <div className={styles.pageButtons}>
         <Link to="/">
           <Button variant="primary">Movies</Button>

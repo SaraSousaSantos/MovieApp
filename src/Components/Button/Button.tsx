@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import styles from "./button.module.css";
 
-interface ButtonProps {
+type ButtonProps ={
   variant: "primary" | "secondary";
   children: ReactNode;
   isActive?: boolean;

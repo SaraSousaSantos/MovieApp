@@ -28,13 +28,15 @@ function GetCast() {
   return (
     <div className={styles.cast}>
       <h1>Cast</h1>
-      <div className={styles.cast}>
-        {cast.map((actor) => (
-          <Cast
-            name={actor.name}
-            profile_path={`https://image.tmdb.org/t/p/original${actor.profile_path}`}
-          />
-        ))}
+      <div className={styles.actors}>
+        {cast
+          .filter((actor) => actor.profile_path)
+          .map((actor) => (
+            <Cast
+              profile_path={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
+              name={actor.name}
+            />
+          ))}
       </div>
     </div>
   );

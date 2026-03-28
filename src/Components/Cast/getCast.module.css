@@ -1,4 +1,20 @@
 .cast {
   padding: 2rem;
+}
+
+.cast h1 {
+  margin-bottom: 1rem;
+}
+
+.actors {
+  display: flex;
   gap: 1rem;
+  font-size: 1rem;
+  overflow-x: hidden;
+}
+
+.picture {
+  object-fit: cover;
+  max-height: 10rem;
+  max-width: 7rem;
 }
