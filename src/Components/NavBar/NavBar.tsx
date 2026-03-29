@@ -1,6 +1,5 @@
 // import avatar from "../../assets/avatar.png";
 import styles from "./navBar.module.css";
-import Search from "../../assets/Search/Search";
 import Button from "../Button/Button";
 import { Link } from "react-router-dom";
 
@@ -17,10 +16,7 @@ function NavBar() {
         </Link>
       </div>
 
-      <div className={styles.searchBar}>
-        <Search className={styles.icon} />
-        <input type="text" placeholder="Search" className={styles.search} />
-      </div>
+     
     </div>
   );
 }
