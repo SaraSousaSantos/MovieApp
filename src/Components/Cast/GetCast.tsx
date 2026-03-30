@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
 import options from "../../helpers";
-import { useParams } from "react-router-dom";
+
 import type { CastProps } from "./Cast";
 import Cast from "./Cast";
 import styles from "./getCast.module.css";
 
-function GetCast() {
-  const { movie_id } = useParams();
-  console.log("params", movie_id);
+
+
+type GetCastProps = {
+  id: string | undefined;
+  mediaType: MediaType;
+};
+
+type MediaType = "movie" | "tv";
+
+
+function GetCast({ id, mediaType }: GetCastProps) {
 
   const [cast, setCast] = useState<CastProps[]>([]);
   console.log("cast", cast);
@@ -15,7 +23,7 @@ function GetCast() {
   useEffect(() => {
     const fetchCast = async () => {
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movie_id}/credits`,
+        `https://api.themoviedb.org/3/${mediaType}/${id}/credits`,
         options,
       );
       const data = await response.json();
@@ -23,7 +31,7 @@ function GetCast() {
       setCast(data.cast);
     };
     fetchCast();
-  }, [movie_id]);
+  }, [mediaType,id]);
 
   return (
     <div className={styles.cast}>
@@ -33,6 +41,7 @@ function GetCast() {
           .filter((actor) => actor.profile_path)
           .map((actor) => (
             <Cast
+             key={actor.id}
               profile_path={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
               name={actor.name}
             />

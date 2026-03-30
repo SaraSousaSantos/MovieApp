@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Imovie } from "../../types/movie";
-
 import styles from "./moviesPage.module.css";
-import MovieCard from "../../Components/MovieCard/MovieCard";
+import Card from "../../Components/Card/Card";
 import { Link } from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import { fetchMovies, searchMovies } from "../../Requests/RequestsMovies";
@@ -15,7 +14,6 @@ function MoviesPage() {
 
   const [search, setSearch] = useState<string>("");
   const [searchResults, setSearchResults] = useState<Imovie[]>([]);
-
 
   useEffect(() => {
     const getMovies = async () => {
@@ -63,8 +61,8 @@ function MoviesPage() {
             {searchResults.map((movie) => (
               <Link to={`/movieDetailsPage/${movie.id}`} key={movie.id}>
                 <Button variant="secondary">
-                  <MovieCard
-                    image={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                  <Card
+                    image={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                     title={movie.title}
                     rating={movie.vote_average}
                   />
@@ -81,12 +79,12 @@ function MoviesPage() {
               {popular.map((movie) => (
                 <Link to={`/movieDetailsPage/${movie.id}`} key={movie.id}>
                   <Button variant="secondary">
-                    <MovieCard
+                    <Card
                       key={movie.id}
-                      image={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                      image={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                       title={movie.title}
                       rating={movie.vote_average}
-                    ></MovieCard>
+                    ></Card>
                   </Button>
                 </Link>
               ))}
@@ -98,12 +96,12 @@ function MoviesPage() {
               {topRated.map((movie) => (
                 <Link to={`/movieDetailsPage/${movie.id}`} key={movie.id}>
                   <Button variant="secondary">
-                    <MovieCard
+                    <Card
                       key={movie.id}
-                      image={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                      image={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                       title={movie.title}
                       rating={movie.vote_average}
-                    ></MovieCard>
+                    ></Card>
                   </Button>
                 </Link>
               ))}
@@ -116,12 +114,12 @@ function MoviesPage() {
               {nowPlaying.map((movie) => (
                 <Link to={`/movieDetailsPage/${movie.id}`} key={movie.id}>
                   <Button variant="secondary">
-                    <MovieCard
+                    <Card
                       key={movie.id}
-                      image={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                      image={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                       title={movie.title}
                       rating={movie.vote_average}
-                    ></MovieCard>
+                    ></Card>
                   </Button>
                 </Link>
               ))}
@@ -134,5 +132,3 @@ function MoviesPage() {
 }
 
 export default MoviesPage;
-
-

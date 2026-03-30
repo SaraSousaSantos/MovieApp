@@ -1,15 +1,15 @@
-import styles from "./movieCard.module.css";
+import styles from "./Card.module.css";
 
-type MovieCardProps = {
+type CardProps = {
   image: string;
   title: string;
   rating: number;
 };
 
-function MovieCard({ image, title, rating }: MovieCardProps) {
+function Card({ image, title, rating }: CardProps) {
   const stars = Math.round(rating / 2);
   return (
-    <div className={styles.movieCard}>
+    <div className={styles.Card}>
       <img className={styles.poster} src={image} alt={title} />
       <p className={styles.title}>{title}</p>
       <span className={styles.starRating}>{"⭐".repeat(stars)}</span>
@@ -17,4 +17,4 @@ function MovieCard({ image, title, rating }: MovieCardProps) {
   );
 }
 
-export default MovieCard;
+export default Card;

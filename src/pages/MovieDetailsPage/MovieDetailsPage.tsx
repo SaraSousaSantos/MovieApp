@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { Imovie } from "../../types/movie";
 import options from "../../helpers";
 import { useParams } from "react-router-dom";
-import MovieDetails from "../../Components/MovieDetails/MovieDetails";
+import Details from "../../Components/Details/Details";
 import GetCast from "../../Components/Cast/GetCast";
 
 function MovieDetailsPage() {
@@ -27,18 +27,21 @@ function MovieDetailsPage() {
 
   return (
     <>
-      <MovieDetails
+      <Details
         key={movie?.id}
         backdrop={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
-        image={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
+        image={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
         title={movie?.title}
         overview={movie?.overview}
         adult={movie?.adult}
         genres={movie?.genres}
         rating={movie?.vote_average}
-      ></MovieDetails>
+      ></Details>
 
-      <GetCast/>
+      <GetCast
+        id={movie_id}
+        mediaType="movie"
+      />
     </>
   );
 }
