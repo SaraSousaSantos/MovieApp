@@ -27,14 +27,19 @@
 }
 
 .movies {
-  padding: 1rem;
-  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
 .sectionTitle {
   font-size: 2rem;
-  padding: 1rem 2.9rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding: 0rem 2.2rem;
 }
 
 .moviesCards {
@@ -42,6 +47,15 @@
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: flex-start;
-  padding: 1rem;
-  margin-left: 1.5rem;
+  padding: 0rem 2.2rem;
+}
+
+@media (max-width: 900px) {
+  .moviesCards {
+    justify-content: center;
+  }
+
+  .sectionTitle {
+    text-align: center;
+  }
 }

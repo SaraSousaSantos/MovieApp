@@ -1,4 +1,3 @@
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import TvSeriesPage from "./pages/TvSeriesPage/TvSeriesPage";

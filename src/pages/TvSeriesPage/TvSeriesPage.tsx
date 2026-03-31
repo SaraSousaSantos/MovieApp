@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { ItvSeries } from "../../types/tvSeries";
-import styles from "./tvSeriesPage.module.css";
+import styles from "../MoviesPage/detailsPage.module.css";
 import Card from "../../Components/Card/Card";
 import { Link } from "react-router-dom";
 import Button from "../../Components/Button/Button";

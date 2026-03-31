@@ -3,12 +3,12 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  max-width:15rem;
+  max-width:12rem;
 }
 
 .poster {
   border-radius: 10px;
-  max-width: 15rem;
+  max-width: 12rem;
 }
 
 .title {
@@ -18,6 +18,4 @@
   overflow-wrap: break-word;
 }
 
-.starRating {
-  font-size: 0.9rem;
-}
+

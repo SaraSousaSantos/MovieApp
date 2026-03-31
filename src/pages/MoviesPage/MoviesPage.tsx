@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Imovie } from "../../types/movie";
-import styles from "./moviesPage.module.css";
+import styles from "./detailsPage.module.css";
 import Card from "../../Components/Card/Card";
 import { Link } from "react-router-dom";
 import Button from "../../Components/Button/Button";
