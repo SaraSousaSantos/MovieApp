@@ -1,6 +1,8 @@
 .searchArea {
   display: flex;
   justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
 }
 
 .searchBar {
@@ -9,9 +11,9 @@
 }
 
 .search {
-  background-color: rgb(21, 21, 31);
-  border: 1px solid rgb(21, 21, 31);
-  border-radius: 4px;
+  background-color: rgb(31, 31, 43, 0.9);
+  border: 1px solid rgb(31, 31, 43, 0.9);
+  border-radius: 10px;
   width: 100%;
   height: 2.5rem;
   color: rgb(255, 255, 255);
@@ -26,36 +28,47 @@
   color: rgb(255, 255, 255);
 }
 
-.movies {
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  margin-top: 2rem;
 }
 
 .sectionTitle {
   font-size: 2rem;
-  margin-top: 2rem;
   margin-bottom: 1rem;
+  margin-top: 2rem;
   padding: 0rem 2.2rem;
 }
 
-.moviesCards {
+.cards {
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
   justify-content: flex-start;
   padding: 0rem 2.2rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(58, 58, 58) rgb(31, 31, 43, 0.9);
 }
 
 @media (max-width: 900px) {
-  .moviesCards {
+  .cards {
     justify-content: center;
   }
 
   .sectionTitle {
     text-align: center;
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
+    padding: 0rem 2.2rem;
   }
 }

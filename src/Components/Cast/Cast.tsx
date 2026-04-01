@@ -1,20 +1,22 @@
 import styles from "./getCast.module.css";
 
 export type CastProps = {
-  id: number;
+  id?: number;
   name: string;
   profile_path: string;
- 
+  character: string;
 };
 
-type IcastCard = Pick<CastProps, "name" | "profile_path">;
-
-function Cast({ name, profile_path }: IcastCard) {
-  // if (!profile_path) return null;
+function Cast({ name, profile_path, character }: CastProps) {
   return (
     <div>
       <img src={profile_path} alt={name} className={styles.picture}></img>
-      <p>{name}</p>
+      <div className={styles.name}>
+        <p>{name}</p>
+        <div className={styles.character}>
+          <p>{character}</p>
+        </div>
+      </div>
     </div>
   );
 }

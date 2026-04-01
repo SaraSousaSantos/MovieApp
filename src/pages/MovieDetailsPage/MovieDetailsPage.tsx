@@ -18,6 +18,11 @@ function MovieDetailsPage() {
         `https://api.themoviedb.org/3/movie/${movie_id}`,
         options,
       );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch Movie Details");
+      }
+
       const data = await response.json();
       console.log("data", data);
       setMovie(data);
@@ -36,12 +41,11 @@ function MovieDetailsPage() {
         adult={movie?.adult}
         genres={movie?.genres}
         rating={movie?.vote_average}
+        runtime={movie?.runtime}  
+        release_date={movie?.release_date.slice(0, 4)}
       ></Details>
 
-      <GetCast
-        id={movie_id}
-        mediaType="movie"
-      />
+      <GetCast id={movie_id} mediaType="movie" />
     </>
   );
 }

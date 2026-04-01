@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Imovie } from "../../types/movie";
-import styles from "./detailsPage.module.css";
+import styles from "./mainPage.module.css";
 import Card from "../../Components/Card/Card";
 import { Link } from "react-router-dom";
 import Button from "../../Components/Button/Button";
@@ -55,9 +55,9 @@ function MoviesPage() {
       </div>
 
       {search ? (
-        <section className={styles.movies}>
+        <section className={styles.container}>
           <h1 className={styles.sectionTitle}>Search Results</h1>
-          <div className={styles.moviesCards}>
+          <div className={styles.cards}>
             {searchResults.map((movie) => (
               <Link to={`/movieDetailsPage/${movie.id}`} key={movie.id}>
                 <Button variant="secondary">
@@ -73,9 +73,9 @@ function MoviesPage() {
         </section>
       ) : (
         <>
-          <section className={styles.movies}>
+          <section className={styles.container}>
             <h1 className={styles.sectionTitle}>Popular Movies</h1>
-            <div className={styles.moviesCards}>
+            <div className={styles.cards}>
               {popular.map((movie) => (
                 <Link to={`/movieDetailsPage/${movie.id}`} key={movie.id}>
                   <Button variant="secondary">
@@ -90,9 +90,9 @@ function MoviesPage() {
               ))}
             </div>
           </section>
-          <section className={styles.movies}>
+          <section className={styles.container}>
             <h1 className={styles.sectionTitle}>Top Rated</h1>
-            <div className={styles.moviesCards}>
+            <div className={styles.cards}>
               {topRated.map((movie) => (
                 <Link to={`/movieDetailsPage/${movie.id}`} key={movie.id}>
                   <Button variant="secondary">
@@ -108,9 +108,9 @@ function MoviesPage() {
             </div>
           </section>
 
-          <section className={styles.movies}>
+          <section className={styles.container}>
             <h1 className={styles.sectionTitle}>Now Playing</h1>
-            <div className={styles.moviesCards}>
+            <div className={styles.cards}>
               {nowPlaying.map((movie) => (
                 <Link to={`/movieDetailsPage/${movie.id}`} key={movie.id}>
                   <Button variant="secondary">

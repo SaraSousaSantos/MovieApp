@@ -5,8 +5,6 @@ import type { CastProps } from "./Cast";
 import Cast from "./Cast";
 import styles from "./getCast.module.css";
 
-
-
 type GetCastProps = {
   id: string | undefined;
   mediaType: MediaType;
@@ -14,9 +12,7 @@ type GetCastProps = {
 
 type MediaType = "movie" | "tv";
 
-
 function GetCast({ id, mediaType }: GetCastProps) {
-
   const [cast, setCast] = useState<CastProps[]>([]);
   console.log("cast", cast);
 
@@ -26,12 +22,17 @@ function GetCast({ id, mediaType }: GetCastProps) {
         `https://api.themoviedb.org/3/${mediaType}/${id}/credits`,
         options,
       );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch Cast");
+      }
+
       const data = await response.json();
       console.log("data", data);
       setCast(data.cast);
     };
     fetchCast();
-  }, [mediaType,id]);
+  }, [mediaType, id]);
 
   return (
     <div className={styles.cast}>
@@ -41,9 +42,10 @@ function GetCast({ id, mediaType }: GetCastProps) {
           .filter((actor) => actor.profile_path)
           .map((actor) => (
             <Cast
-             key={actor.id}
+              key={actor.id}
               profile_path={`https://image.tmdb.org/t/p/w185${actor.profile_path}`}
               name={actor.name}
+              character={actor.character}
             />
           ))}
       </div>

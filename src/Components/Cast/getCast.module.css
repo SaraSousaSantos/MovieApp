@@ -10,11 +10,25 @@
   display: flex;
   gap: 1rem;
   font-size: 1rem;
-  overflow-x: hidden;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(58, 58, 58) rgb(31, 31, 43, 0.9);
+  padding-bottom: 1rem;
 }
 
 .picture {
   object-fit: cover;
   max-height: 10rem;
   max-width: 7rem;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  gap:0.3rem;
+}
+
+.character {
+  font-size: 0.8rem;
+  color: rgb(143, 140, 140);
 }

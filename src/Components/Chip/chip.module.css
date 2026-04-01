@@ -1,14 +1,16 @@
 .chip {
-  display: inline-block;
+  display: inline-flex;
   padding: 0.25rem 0.5rem;
   border-radius: 5px;
   font-size: 1rem;
   font-weight: bold;
+  align-items: center;
+  gap: 0.25rem;
   
 }
 
 .primary {
-  background-color: #3a3a3a;
+  background-color: rgb(58, 58, 58);
   color: rgb(255, 255, 255);
 }
 

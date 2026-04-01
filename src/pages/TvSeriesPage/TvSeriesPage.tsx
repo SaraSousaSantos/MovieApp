@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { ItvSeries } from "../../types/tvSeries";
-import styles from "../MoviesPage/detailsPage.module.css";
+import styles from "../MoviesPage/mainPage.module.css";
 import Card from "../../Components/Card/Card";
 import { Link } from "react-router-dom";
 import Button from "../../Components/Button/Button";
@@ -55,9 +55,9 @@ function TvSeriesPage() {
       </div>
 
       {searchTv ? (
-        <section className={styles.movies}>
+        <section className={styles.container}>
           <h1 className={styles.sectionTitle}>Search Results</h1>
-          <div className={styles.moviesCards}>
+          <div className={styles.cards}>
             {searchResultsTv.map((show) => (
               <Link to={`/tvSeriesDetailsPage/${show.id}`} key={show.id}>
                 <Button variant="secondary">
@@ -73,9 +73,9 @@ function TvSeriesPage() {
         </section>
       ) : (
         <>
-          <section className={styles.movies}>
+          <section className={styles.container}>
             <h1 className={styles.sectionTitle}>Popular TV Series</h1>
-            <div className={styles.moviesCards}>
+            <div className={styles.cards}>
               {popularTv.map((show) => (
                 <Link to={`/tvSeriesDetailsPage/${show.id}`} key={show.id}>
                   <Button variant="secondary">
@@ -90,9 +90,9 @@ function TvSeriesPage() {
               ))}
             </div>
           </section>
-          <section className={styles.movies}>
+          <section className={styles.container}>
             <h1 className={styles.sectionTitle}>Top Rated</h1>
-            <div className={styles.moviesCards}>
+            <div className={styles.cards}>
               {topRatedTv.map((show) => (
                 <Link to={`/tvSeriesDetailsPage/${show.id}`} key={show.id}>
                   <Button variant="secondary">
@@ -108,9 +108,9 @@ function TvSeriesPage() {
             </div>
           </section>
 
-          <section className={styles.movies}>
+          <section className={styles.container}>
             <h1 className={styles.sectionTitle}>On The Air</h1>
-            <div className={styles.moviesCards}>
+            <div className={styles.cards}>
               {onTheAirTv.map((show) => (
                 <Link to={`/tvSeriesDetailsPage/${show.id}`} key={show.id}>
                   <Button variant="secondary">

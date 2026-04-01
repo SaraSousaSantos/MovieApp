@@ -5,7 +5,7 @@ button {
 }
 
 .primary {
-  background-color: #3a3a3a;
+  background-color: rgb(58, 58, 58);
   color: rgb(255, 255, 255);
   border-radius: 4px;
   width: 7.5rem;
@@ -31,7 +31,7 @@ button {
 }
 
 .secondary {
-  background-color: rgb(31, 31, 43);
+  background-color: rgb(31, 31, 43, 0.9);
   border-radius: 10px;
   color: rgb(255, 255, 255);
   transition:

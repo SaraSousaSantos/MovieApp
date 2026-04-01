@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import Details from "../../Components/Details/Details";
 import GetCast from "../../Components/Cast/GetCast";
 
-
 function TvSeriesDetailsPage() {
   const { series_id } = useParams();
   console.log("params", series_id);
@@ -19,6 +18,11 @@ function TvSeriesDetailsPage() {
         `https://api.themoviedb.org/3/tv/${series_id}`,
         options,
       );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch Tv Series Details");
+      }
+
       const data = await response.json();
       console.log("data", data);
       setShow(data);
@@ -37,12 +41,11 @@ function TvSeriesDetailsPage() {
         adult={show?.adult}
         genres={show?.genres}
         rating={show?.vote_average}
+        episode_run_time={show?.episode_run_time}
+        release_date={show?.first_air_date.slice(0, 4)}
       ></Details>
 
-      <GetCast
-        id={series_id}
-        mediaType="tv"
-      />
+      <GetCast id={series_id} mediaType="tv" />
     </>
   );
 }
