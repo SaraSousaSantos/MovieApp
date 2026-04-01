@@ -7,7 +7,12 @@
 }
 
 body {
-  background: linear-gradient(to right, rgb(20, 20, 28), rgb(34, 34, 80));
+  background: linear-gradient(
+    to right,
+    rgb(39, 39, 54),
+    rgb(34, 34, 80),
+    rgb(39, 39, 54)
+  );
   font-family: "Inter", sans-serif;
   color: rgb(255, 255, 255);
 }

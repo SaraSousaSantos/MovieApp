@@ -3,7 +3,8 @@ import type { ItvSeries } from "../../types/tvSeries";
 import options from "../../helpers";
 import { useParams } from "react-router-dom";
 import Details from "../../Components/Details/Details";
-import GetCast from "../../Components/Cast/GetCast";
+import GetCast from "../../Components/CastEndCrew/GetCast";
+import GetCrew from "../../Components/Crew/GetCrew";
 
 function TvSeriesDetailsPage() {
   const { series_id } = useParams();
@@ -46,6 +47,7 @@ function TvSeriesDetailsPage() {
       ></Details>
 
       <GetCast id={series_id} mediaType="tv" />
+       <GetCrew id={series_id} mediaType="tv" />
     </>
   );
 }

@@ -1,0 +1,32 @@
+.crew {
+  padding: 2rem;
+}
+
+.crew h1 {
+  margin-bottom: 1rem;
+}
+
+.members {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(58, 58, 58) rgb(31, 31, 43, 0.9);
+ 
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  word-wrap: break-word;
+  max-width: 7rem;
+}
+
+.job {
+  font-size: 0.8rem;
+  color: rgb(143, 140, 140);
+  word-wrap: break-word;
+  max-width: 7rem;
+}

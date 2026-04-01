@@ -33,12 +33,12 @@ function formatRuntime(runtime: number | null | undefined): string {
 
 function formatEpisodeRuntime(
   episode_run_time: number[] | null | undefined,
-): string {
-  if (!episode_run_time|| episode_run_time.length === 0) return "—";
+): string | null {
+  if (!episode_run_time || episode_run_time.length === 0) return null;
 
-const totalMinutes = episode_run_time[0];
-const hours = Math.floor(totalMinutes / 60);
-const minutes = totalMinutes % 60;
+  const totalMinutes = episode_run_time[0];
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
 
   if (hours === 0) return `${minutes}m`;
   return `${hours}h ${minutes}m`;
@@ -58,6 +58,8 @@ function Details({
   overview,
 }: DetailsProps) {
   const displayTitle = title || name;
+
+  const hasEpisodeRuntime = episode_run_time && episode_run_time.length > 0;
 
   return (
     <>
@@ -85,11 +87,13 @@ function Details({
           </Chip>
           <Chip variant="primary">{release_date}</Chip>
 
-          <Chip variant="primary">
-            {runtime
-              ? formatRuntime(runtime)
-              : formatEpisodeRuntime(episode_run_time)}
-          </Chip>
+          {(runtime || hasEpisodeRuntime) && (
+            <Chip variant="primary">
+              {runtime
+                ? formatRuntime(runtime)
+                : formatEpisodeRuntime(episode_run_time)}
+            </Chip>
+          )}
         </div>
 
         <h1 className={styles.title}>Overview</h1>

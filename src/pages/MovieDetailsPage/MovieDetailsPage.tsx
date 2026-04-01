@@ -3,7 +3,8 @@ import type { Imovie } from "../../types/movie";
 import options from "../../helpers";
 import { useParams } from "react-router-dom";
 import Details from "../../Components/Details/Details";
-import GetCast from "../../Components/Cast/GetCast";
+import GetCast from "../../Components/CastEndCrew/GetCast";
+import GetCrew from "../../Components/Crew/GetCrew";
 
 function MovieDetailsPage() {
   const { movie_id } = useParams();
@@ -41,11 +42,12 @@ function MovieDetailsPage() {
         adult={movie?.adult}
         genres={movie?.genres}
         rating={movie?.vote_average}
-        runtime={movie?.runtime}  
+        runtime={movie?.runtime}
         release_date={movie?.release_date.slice(0, 4)}
       ></Details>
 
       <GetCast id={movie_id} mediaType="movie" />
+      <GetCrew id={movie_id} mediaType="movie" />
     </>
   );
 }
