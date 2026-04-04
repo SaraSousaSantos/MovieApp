@@ -58,7 +58,6 @@ function Details({
   overview,
 }: DetailsProps) {
   const displayTitle = title || name;
-
   const hasEpisodeRuntime = episode_run_time && episode_run_time.length > 0;
 
   return (

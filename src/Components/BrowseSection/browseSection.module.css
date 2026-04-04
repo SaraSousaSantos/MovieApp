@@ -55,20 +55,26 @@
   scrollbar-color: rgb(58, 58, 58) rgb(31, 31, 43, 0.9);
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: rgb(255, 255, 255);
+}
+
+
+
 @media (max-width: 900px) {
   .cards {
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0rem 2.2rem;
   }
 
   .sectionTitle {
     text-align: center;
-  }
-
-  .cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: flex-start;
-    padding: 0rem 2.2rem;
   }
 }

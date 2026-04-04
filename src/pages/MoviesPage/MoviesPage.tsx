@@ -1,29 +1,37 @@
 import { useEffect, useState } from "react";
 import type { Imovie } from "../../types/movie";
-import styles from "./mainPage.module.css";
-import Card from "../../Components/Card/Card";
-import { Link } from "react-router-dom";
-import Button from "../../Components/Button/Button";
 import { fetchMovies, searchMovies } from "../../Requests/RequestsMovies";
 import Search from "../../assets/Search/Search";
+import styles from "../../Components/BrowseSection/browseSection.module.css";
+import BrowseSection from "../../Components/BrowseSection/BrowseSection";
 
 function MoviesPage() {
   const [popular, setPopular] = useState<Imovie[]>([]);
   const [topRated, setTopRated] = useState<Imovie[]>([]);
   const [nowPlaying, setNowPlaying] = useState<Imovie[]>([]);
+  const [upcoming, setUpcoming] = useState<Imovie[]>([]);
 
   const [search, setSearch] = useState<string>("");
   const [searchResults, setSearchResults] = useState<Imovie[]>([]);
 
+  const [isLoadingMovies, setIsLoadingMovies] = useState<boolean>(false);
+
   useEffect(() => {
     const getMovies = async () => {
-      const popular = await fetchMovies("popular");
-      const topRated = await fetchMovies("top_rated");
-      const nowPlaying = await fetchMovies("now_playing");
+      setIsLoadingMovies(true);
+      try {
+        const popular = await fetchMovies("popular");
+        const topRated = await fetchMovies("top_rated");
+        const nowPlaying = await fetchMovies("now_playing");
+        const upcoming = await fetchMovies("upcoming");
 
-      setPopular(popular.results);
-      setTopRated(topRated.results);
-      setNowPlaying(nowPlaying.results);
+        setPopular(popular.results);
+        setTopRated(topRated.results);
+        setNowPlaying(nowPlaying.results);
+        setUpcoming(upcoming.results);
+      } finally {
+        setIsLoadingMovies(false);
+      }
     };
     getMovies();
   }, []);
@@ -37,6 +45,13 @@ function MoviesPage() {
     getSearchMovies();
   }, [search]);
 
+  if (isLoadingMovies) {
+    return (
+      <div className={styles.loading}>
+        <p> Loading...</p>
+      </div>
+    );
+  }
   return (
     <>
       <div className={styles.searchArea}>
@@ -55,76 +70,36 @@ function MoviesPage() {
       </div>
 
       {search ? (
-        <section className={styles.container}>
-          <h1 className={styles.sectionTitle}>Search Results</h1>
-          <div className={styles.cards}>
-            {searchResults.map((movie) => (
-              <Link to={`/movieDetailsPage/${movie.id}`} key={movie.id}>
-                <Button variant="secondary">
-                  <Card
-                    image={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                    title={movie.title}
-                    rating={movie.vote_average}
-                  />
-                </Button>
-              </Link>
-            ))}
-          </div>
-        </section>
+        <BrowseSection
+          sectionTitle="Search Results"
+          items={searchResults}
+          detailsPath="movieDetailsPage"
+        />
       ) : (
         <>
-          <section className={styles.container}>
-            <h1 className={styles.sectionTitle}>Popular Movies</h1>
-            <div className={styles.cards}>
-              {popular.map((movie) => (
-                <Link to={`/movieDetailsPage/${movie.id}`} key={movie.id}>
-                  <Button variant="secondary">
-                    <Card
-                      key={movie.id}
-                      image={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                      title={movie.title}
-                      rating={movie.vote_average}
-                    ></Card>
-                  </Button>
-                </Link>
-              ))}
-            </div>
-          </section>
-          <section className={styles.container}>
-            <h1 className={styles.sectionTitle}>Top Rated</h1>
-            <div className={styles.cards}>
-              {topRated.map((movie) => (
-                <Link to={`/movieDetailsPage/${movie.id}`} key={movie.id}>
-                  <Button variant="secondary">
-                    <Card
-                      key={movie.id}
-                      image={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                      title={movie.title}
-                      rating={movie.vote_average}
-                    ></Card>
-                  </Button>
-                </Link>
-              ))}
-            </div>
-          </section>
+          <BrowseSection
+            sectionTitle="Popular Movies"
+            items={popular}
+            detailsPath="movieDetailsPage"
+          />
 
-          <section className={styles.container}>
-            <h1 className={styles.sectionTitle}>Now Playing</h1>
-            <div className={styles.cards}>
-              {nowPlaying.map((movie) => (
-                <Link to={`/movieDetailsPage/${movie.id}`} key={movie.id}>
-                  <Button variant="secondary">
-                    <Card
-                      key={movie.id}
-                      image={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                      title={movie.title}
-                      rating={movie.vote_average}
-                    ></Card>
-                  </Button>
-                </Link>
-              ))}
-            </div>
-          </section>
+          <BrowseSection
+            sectionTitle="Top Rated"
+            items={topRated}
+            detailsPath="movieDetailsPage"
+          />
+
+          <BrowseSection
+            sectionTitle="Now Playing"
+            items={nowPlaying}
+            detailsPath="movieDetailsPage"
+          />
+
+          <BrowseSection
+            sectionTitle="Upcoming"
+            items={upcoming}
+            detailsPath="movieDetailsPage"
+          />
         </>
       )}
     </>

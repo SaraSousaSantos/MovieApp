@@ -1,29 +1,37 @@
 import { useEffect, useState } from "react";
 import type { ItvSeries } from "../../types/tvSeries";
-import styles from "../MoviesPage/mainPage.module.css";
-import Card from "../../Components/Card/Card";
-import { Link } from "react-router-dom";
-import Button from "../../Components/Button/Button";
 import { fetchTvSeries, searchTvSeries } from "../../Requests/RequestsTv";
 import Search from "../../assets/Search/Search";
+import styles from "../../Components/BrowseSection/browseSection.module.css";
+import BrowseSection from "../../Components/BrowseSection/BrowseSection";
 
 function TvSeriesPage() {
   const [popularTv, setPopularTv] = useState<ItvSeries[]>([]);
   const [topRatedTv, setTopRatedTv] = useState<ItvSeries[]>([]);
   const [onTheAirTv, setOnTheAirTv] = useState<ItvSeries[]>([]);
+  const [airingTodayTv, setAiringTodayTv] = useState<ItvSeries[]>([]);
 
   const [searchTv, setSearchTv] = useState<string>("");
   const [searchResultsTv, setSearchResultsTv] = useState<ItvSeries[]>([]);
 
+  const [isLoadingMovies, setIsLoadingMovies] = useState<boolean>(false);
+
   useEffect(() => {
     const getTvSeries = async () => {
-      const popularTV = await fetchTvSeries("popular");
-      const topRatedTV = await fetchTvSeries("top_rated");
-      const onTheAirTV = await fetchTvSeries("on_the_air");
+      setIsLoadingMovies(true);
+      try {
+        const popularTV = await fetchTvSeries("popular");
+        const topRatedTV = await fetchTvSeries("top_rated");
+        const onTheAirTV = await fetchTvSeries("on_the_air");
+        const airingTodayTV = await fetchTvSeries("airing_today");
 
-      setPopularTv(popularTV.results);
-      setTopRatedTv(topRatedTV.results);
-      setOnTheAirTv(onTheAirTV.results);
+        setPopularTv(popularTV.results);
+        setTopRatedTv(topRatedTV.results);
+        setOnTheAirTv(onTheAirTV.results);
+        setAiringTodayTv(airingTodayTV.results);
+      } finally {
+        setIsLoadingMovies(false);
+      }
     };
     getTvSeries();
   }, []);
@@ -36,6 +44,14 @@ function TvSeriesPage() {
     };
     getSearchTvSeries();
   }, [searchTv]);
+
+  if (isLoadingMovies) {
+    return (
+      <div className={styles.loading}>
+        <p> Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -54,77 +70,38 @@ function TvSeriesPage() {
         </div>
       </div>
 
+     
       {searchTv ? (
-        <section className={styles.container}>
-          <h1 className={styles.sectionTitle}>Search Results</h1>
-          <div className={styles.cards}>
-            {searchResultsTv.map((show) => (
-              <Link to={`/tvSeriesDetailsPage/${show.id}`} key={show.id}>
-                <Button variant="secondary">
-                  <Card
-                    image={`https://image.tmdb.org/t/p/w300${show.poster_path}`}
-                    title={show.name}
-                    rating={show.vote_average}
-                  />
-                </Button>
-              </Link>
-            ))}
-          </div>
-        </section>
+        <BrowseSection
+          sectionTitle="Search Results"
+          items={searchResultsTv}
+          detailsPath="tvSeriesDetailsPage"
+        />
       ) : (
         <>
-          <section className={styles.container}>
-            <h1 className={styles.sectionTitle}>Popular TV Series</h1>
-            <div className={styles.cards}>
-              {popularTv.map((show) => (
-                <Link to={`/tvSeriesDetailsPage/${show.id}`} key={show.id}>
-                  <Button variant="secondary">
-                    <Card
-                      key={show.id}
-                      image={`https://image.tmdb.org/t/p/w300${show.poster_path}`}
-                      title={show.name}
-                      rating={show.vote_average}
-                    ></Card>
-                  </Button>
-                </Link>
-              ))}
-            </div>
-          </section>
-          <section className={styles.container}>
-            <h1 className={styles.sectionTitle}>Top Rated</h1>
-            <div className={styles.cards}>
-              {topRatedTv.map((show) => (
-                <Link to={`/tvSeriesDetailsPage/${show.id}`} key={show.id}>
-                  <Button variant="secondary">
-                    <Card
-                      key={show.id}
-                      image={`https://image.tmdb.org/t/p/w300${show.poster_path}`}
-                      title={show.name}
-                      rating={show.vote_average}
-                    ></Card>
-                  </Button>
-                </Link>
-              ))}
-            </div>
-          </section>
+          <BrowseSection
+            sectionTitle="Popular TV Series"
+            items={popularTv}
+            detailsPath="tvSeriesDetailsPage"
+          />
 
-          <section className={styles.container}>
-            <h1 className={styles.sectionTitle}>On The Air</h1>
-            <div className={styles.cards}>
-              {onTheAirTv.map((show) => (
-                <Link to={`/tvSeriesDetailsPage/${show.id}`} key={show.id}>
-                  <Button variant="secondary">
-                    <Card
-                      key={show.id}
-                      image={`https://image.tmdb.org/t/p/w300${show.poster_path}`}
-                      title={show.name}
-                      rating={show.vote_average}
-                    ></Card>
-                  </Button>
-                </Link>
-              ))}
-            </div>
-          </section>
+          <BrowseSection
+            sectionTitle="Top Rated"
+            items={topRatedTv}
+            detailsPath="tvSeriesDetailsPage"
+          />
+
+          <BrowseSection
+            sectionTitle="Now Playing"
+            items={onTheAirTv}
+            detailsPath="tvSeriesDetailsPage"
+          />
+
+          <BrowseSection
+            sectionTitle="Airing Today"
+            items={airingTodayTv}
+            detailsPath="tvSeriesDetailsPage"
+          />
         </>
       )}
     </>
