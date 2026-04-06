@@ -14,7 +14,7 @@ export const fetchMovies = async (endpoint: string): Promise<ImovieProps> => {
   }
 
   const data: ImovieProps = await response.json();
-  console.log("data", data);
+  
 
   return data;
 };

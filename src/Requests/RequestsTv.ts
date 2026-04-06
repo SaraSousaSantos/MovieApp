@@ -16,7 +16,6 @@ export const fetchTvSeries = async (
   }
 
   const data: ITvSeriesProps = await response.json();
-  console.log("data", data);
 
   return data;
 };
@@ -52,4 +51,3 @@ export const fetchTvSeriesByGenre = async (
   const data: ITvSeriesProps = await response.json();
   return data;
 };
-

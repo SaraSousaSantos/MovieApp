@@ -5,8 +5,6 @@ import styles from "./browseSection.module.css";
 import type { Imovie } from "../../types/movie";
 import type { ItvSeries } from "../../types/tvSeries";
 
-
-
 type MainProps = {
   sectionTitle: string;
   items:Imovie[] | ItvSeries[];

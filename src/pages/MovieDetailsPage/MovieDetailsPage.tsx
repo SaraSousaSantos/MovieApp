@@ -8,10 +8,9 @@ import GetCrew from "../../Components/Crew/GetCrew";
 
 function MovieDetailsPage() {
   const { movie_id } = useParams();
-  console.log("params", movie_id);
-
+  
   const [movie, setMovie] = useState<Imovie | null>(null);
-  console.log("movie", movie);
+  
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -25,7 +24,7 @@ function MovieDetailsPage() {
       }
 
       const data = await response.json();
-      console.log("data", data);
+    
       setMovie(data);
     };
     fetchMovies();

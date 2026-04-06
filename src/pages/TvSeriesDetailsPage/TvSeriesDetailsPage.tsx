@@ -8,10 +8,9 @@ import GetCrew from "../../Components/Crew/GetCrew";
 
 function TvSeriesDetailsPage() {
   const { series_id } = useParams();
-  console.log("params", series_id);
 
   const [show, setShow] = useState<ItvSeries | null>(null);
-  console.log("show", show);
+  
 
   useEffect(() => {
     const fetchTvSeries = async () => {
@@ -25,7 +24,7 @@ function TvSeriesDetailsPage() {
       }
 
       const data = await response.json();
-      console.log("data", data);
+    
       setShow(data);
     };
     fetchTvSeries();

@@ -28,7 +28,7 @@ function GetCast({ id, mediaType }: GetCastProps) {
       }
 
       const data = await response.json();
-      console.log("data", data);
+  
       setCast(data.cast);
     };
     fetchCast();

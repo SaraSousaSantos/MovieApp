@@ -50,6 +50,7 @@ function TvSeriesPage() {
         setSearchResultsTv([]);
         return;
       }
+      
       const data = await searchTvSeries(searchTv);
 
       setSearchResultsTv(data.results);
