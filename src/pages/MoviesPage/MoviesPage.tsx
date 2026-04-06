@@ -4,6 +4,8 @@ import { fetchMovies, searchMovies } from "../../Requests/RequestsMovies";
 import Search from "../../assets/Search/Search";
 import styles from "../../Components/BrowseSection/browseSection.module.css";
 import BrowseSection from "../../Components/BrowseSection/BrowseSection";
+import Genres, { type Genre } from "../../Components/Genres/Genres";
+import options from "../../helpers";
 
 function MoviesPage() {
   const [popular, setPopular] = useState<Imovie[]>([]);
@@ -13,6 +15,9 @@ function MoviesPage() {
 
   const [search, setSearch] = useState<string>("");
   const [searchResults, setSearchResults] = useState<Imovie[]>([]);
+
+  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [genreResults, setGenreResults] = useState<Imovie[]>([]);
 
   const [isLoadingMovies, setIsLoadingMovies] = useState<boolean>(false);
 
@@ -45,6 +50,29 @@ function MoviesPage() {
     getSearchMovies();
   }, [search]);
 
+  useEffect(() => {
+    const getMoviesByGenre = async () => {
+      if (selectedGenre === null) {
+        setGenreResults([]);
+        return;
+      }
+
+      const response = await fetch(
+        `https://api.themoviedb.org/3/discover/movie?with_genres=${selectedGenre.id}`,
+        options,
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch movies by genre");
+      }
+
+      const data = await response.json();
+      setGenreResults(data.results);
+    };
+
+    getMoviesByGenre();
+  }, [selectedGenre]);
+
   if (isLoadingMovies) {
     return (
       <div className={styles.loading}>
@@ -52,6 +80,7 @@ function MoviesPage() {
       </div>
     );
   }
+
   return (
     <>
       <div className={styles.searchArea}>
@@ -69,10 +98,22 @@ function MoviesPage() {
         </div>
       </div>
 
+      <Genres
+        mediaType="movie"
+        selectedGenre={selectedGenre}
+        onClickedGenre={setSelectedGenre}
+      />
+
       {search ? (
         <BrowseSection
           sectionTitle="Search Results"
           items={searchResults}
+          detailsPath="movieDetailsPage"
+        />
+      ) : selectedGenre !== null ? (
+        <BrowseSection
+          sectionTitle={`${selectedGenre?.name} Movies`}
+          items={genreResults}
           detailsPath="movieDetailsPage"
         />
       ) : (

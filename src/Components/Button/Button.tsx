@@ -8,7 +8,7 @@ type ButtonProps ={
 }
 
 function Button({ variant, children, isActive }: ButtonProps) {
-  const classActive = isActive ? "active" : "";
+  const classActive = isActive ?  "active"  : "";
   return (
     <button className={`${styles[variant]} ${styles[classActive]}`}>
       {children}

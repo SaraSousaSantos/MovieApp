@@ -1,13 +1,15 @@
 .searchArea {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
-  margin-bottom: 4rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 2rem auto 0rem auto;
+  padding: 0rem 2rem;
 }
 
 .searchBar {
   position: relative;
-  width: 60%;
+  width: 100%;
 }
 
 .search {
@@ -36,20 +38,20 @@
   max-width: 1400px;
   margin: 0 auto;
   margin-top: 2rem;
+  padding: 0rem 2rem;
 }
 
 .sectionTitle {
   font-size: 2rem;
   margin-bottom: 1rem;
   margin-top: 2rem;
-  padding: 0rem 2.2rem;
 }
 
 .cards {
   display: flex;
   gap: 1rem;
   justify-content: flex-start;
-  padding: 0rem 2.2rem;
+  padding-top: 1rem;
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: rgb(58, 58, 58) rgb(31, 31, 43, 0.9);
@@ -63,8 +65,6 @@
   font-size: 1.5rem;
   color: rgb(255, 255, 255);
 }
-
-
 
 @media (max-width: 900px) {
   .cards {

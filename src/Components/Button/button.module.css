@@ -28,22 +28,17 @@ button {
 
 .primary.active {
   background-color: rgb(91, 75, 255);
-  
 }
 
 .secondary {
-  background-color: rgb(31, 31, 43, 0.9);
+  background-color: transparent;
   border-radius: 10px;
   color: rgb(255, 255, 255);
-  transition:
-    transform 0.15s ease,
-    background-color 0.2s;
 }
 
 .secondary:hover {
-  background-color: rgb(21, 21, 31);
+  background-color: transparent;
   color: rgb(255, 255, 255);
-  transform: scale(1.05);
 }
 
 .secondary.active {

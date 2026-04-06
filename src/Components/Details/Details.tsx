@@ -76,14 +76,16 @@ function Details({
           {adult && <Chip variant="primary" label="+18" />}
 
           {genres?.map((genre) => (
-            <Chip key={genre.id} variant="primary">
+            <Chip variant="primary" key={genre.id}>
               {genre.name}
             </Chip>
           ))}
+
           <Chip variant="primary">
             <Star key={"full"} filled />
             {rating?.toFixed(1)}
           </Chip>
+
           <Chip variant="primary">{release_date}</Chip>
 
           {(runtime || hasEpisodeRuntime) && (

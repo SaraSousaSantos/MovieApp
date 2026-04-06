@@ -4,6 +4,8 @@ import { fetchTvSeries, searchTvSeries } from "../../Requests/RequestsTv";
 import Search from "../../assets/Search/Search";
 import styles from "../../Components/BrowseSection/browseSection.module.css";
 import BrowseSection from "../../Components/BrowseSection/BrowseSection";
+import Genres, { type Genre } from "../../Components/Genres/Genres";
+import options from "../../helpers";
 
 function TvSeriesPage() {
   const [popularTv, setPopularTv] = useState<ItvSeries[]>([]);
@@ -13,6 +15,9 @@ function TvSeriesPage() {
 
   const [searchTv, setSearchTv] = useState<string>("");
   const [searchResultsTv, setSearchResultsTv] = useState<ItvSeries[]>([]);
+
+  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+  const [genreResults, setGenreResults] = useState<ItvSeries[]>([]);
 
   const [isLoadingMovies, setIsLoadingMovies] = useState<boolean>(false);
 
@@ -45,6 +50,29 @@ function TvSeriesPage() {
     getSearchTvSeries();
   }, [searchTv]);
 
+  useEffect(() => {
+    const getTvSeriesByGenre = async () => {
+      if (selectedGenre === null) {
+        setGenreResults([]);
+        return;
+      }
+
+      const response = await fetch(
+        `https://api.themoviedb.org/3/discover/tv?with_genres=${selectedGenre.id}`,
+        options,
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch TV series by genre");
+      }
+
+      const data = await response.json();
+      setGenreResults(data.results);
+    };
+
+    getTvSeriesByGenre();
+  }, [selectedGenre]);
+
   if (isLoadingMovies) {
     return (
       <div className={styles.loading}>
@@ -70,11 +98,22 @@ function TvSeriesPage() {
         </div>
       </div>
 
-     
+      <Genres
+        mediaType="tv"
+        selectedGenre={selectedGenre}
+        onClickedGenre={setSelectedGenre}
+      />
+
       {searchTv ? (
         <BrowseSection
           sectionTitle="Search Results"
           items={searchResultsTv}
+          detailsPath="tvSeriesDetailsPage"
+        />
+      ) : selectedGenre !== null ? (
+        <BrowseSection
+          sectionTitle={`${selectedGenre?.name} TV Series`}
+          items={genreResults}
           detailsPath="tvSeriesDetailsPage"
         />
       ) : (

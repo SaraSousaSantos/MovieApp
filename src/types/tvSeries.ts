@@ -1,4 +1,4 @@
-export interface ItvSeries {
+export type ItvSeries ={
   adult: boolean;
   backdrop_path: string | null;
   created_by: CreatedBy[];
@@ -75,7 +75,7 @@ type ProductionCompany = {
   origin_country: string;
 };
 
-type ProductionCountry = {
+ type ProductionCountry = {
   iso_3166_1: string;
   name: string;
 };

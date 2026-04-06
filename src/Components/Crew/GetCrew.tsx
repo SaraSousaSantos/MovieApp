@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import options from "../../helpers";
-
 import type { CrewProps } from "./Crew";
 import Crew from "./Crew";
 import styles from "./getCrew.module.css";
@@ -28,7 +27,7 @@ function GetCrew({ id, mediaType }: GetCrewProps) {
       }
 
       const data = await response.json();
-      console.log("data", data);
+
       setCrew(data.crew);
     };
     fetchCrew();
@@ -39,12 +38,8 @@ function GetCrew({ id, mediaType }: GetCrewProps) {
       <h1>Crew</h1>
       <div className={styles.members}>
         {crew.map((c) => (
-            <Crew
-              key={c.id}
-              name={c.name}
-              job={c.job}
-            />
-          ))}
+          <Crew key={c.id} name={c.name} job={c.job} />
+        ))}
       </div>
     </div>
   );

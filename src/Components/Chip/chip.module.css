@@ -6,7 +6,6 @@
   font-weight: bold;
   align-items: center;
   gap: 0.25rem;
-  
 }
 
 .primary {
@@ -14,4 +13,19 @@
   color: rgb(255, 255, 255);
 }
 
+.secondary {
+  background-color: rgb(31, 31, 43, 0.9);
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
 
+.secondary:hover {
+  background-color: rgb(21, 21, 31);
+  color: rgb(255, 255, 255);
+  transform: scale(1.05);
+}
+
+.secondary.active {
+  background-color: rgb(91, 75, 255);
+}
