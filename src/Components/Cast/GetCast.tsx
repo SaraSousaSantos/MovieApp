@@ -36,7 +36,7 @@ function GetCast({ id, mediaType }: GetCastProps) {
 
   return (
     <div className={styles.cast}>
-      <h1>Cast</h1>
+      <h1 className={styles.sectionTitle}>Cast</h1>
       <div className={styles.actors}>
         {cast
           .filter((actor) => actor.profile_path)

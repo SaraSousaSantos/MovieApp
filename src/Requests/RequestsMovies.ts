@@ -32,3 +32,19 @@ export const searchMovies = async (query: string): Promise<ImovieProps> => {
   const data: ImovieProps = await response.json();
   return data;
 };
+
+export const fetchMoviesByGenre = async (
+  genre: number,
+): Promise<ImovieProps> => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?with_genres=${genre}`,
+    options,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch movies by genre");
+  }
+
+  const data: ImovieProps = await response.json();
+  return data;
+};

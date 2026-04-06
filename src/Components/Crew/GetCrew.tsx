@@ -35,7 +35,7 @@ function GetCrew({ id, mediaType }: GetCrewProps) {
 
   return (
     <div className={styles.crew}>
-      <h1>Crew</h1>
+      <h1 className={styles.sectionTitle}>Crew</h1>
       <div className={styles.members}>
         {crew.map((c) => (
           <Crew key={c.id} name={c.name} job={c.job} />

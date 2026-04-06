@@ -36,3 +36,20 @@ export const searchTvSeries = async (
   const data: ITvSeriesProps = await response.json();
   return data;
 };
+
+export const fetchTvSeriesByGenre = async (
+  genre: number,
+): Promise<ITvSeriesProps> => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/discover/tv?with_genres=${genre}`,
+    options,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch TV series by genre");
+  }
+
+  const data: ITvSeriesProps = await response.json();
+  return data;
+};
+

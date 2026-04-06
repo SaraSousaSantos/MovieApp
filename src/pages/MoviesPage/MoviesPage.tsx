@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import type { Imovie } from "../../types/movie";
-import { fetchMovies, searchMovies } from "../../Requests/RequestsMovies";
-import Search from "../../assets/Search/Search";
+import {
+  fetchMovies,
+  searchMovies,
+  fetchMoviesByGenre,
+} from "../../Requests/RequestsMovies";
+import Search from "../../Components/Search/Search";
 import styles from "../../Components/BrowseSection/browseSection.module.css";
 import BrowseSection from "../../Components/BrowseSection/BrowseSection";
 import Genres, { type Genre } from "../../Components/Genres/Genres";
-import options from "../../helpers";
 
 function MoviesPage() {
   const [popular, setPopular] = useState<Imovie[]>([]);
@@ -43,6 +46,11 @@ function MoviesPage() {
 
   useEffect(() => {
     const getSearchMovies = async () => {
+      if (!search.trim()) {
+        setSearchResults([]);
+        return;
+      }
+
       const data = await searchMovies(search);
 
       setSearchResults(data.results);
@@ -56,17 +64,7 @@ function MoviesPage() {
         setGenreResults([]);
         return;
       }
-
-      const response = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?with_genres=${selectedGenre.id}`,
-        options,
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch movies by genre");
-      }
-
-      const data = await response.json();
+      const data = await fetchMoviesByGenre(selectedGenre.id);
       setGenreResults(data.results);
     };
 

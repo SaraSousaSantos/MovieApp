@@ -12,7 +12,7 @@
   font-size: 1rem;
   overflow-x: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgb(58, 58, 58) rgb(31, 31, 43, 0.9);
+  scrollbar-color: rgb(58, 58, 58) transparent;
   padding-bottom: 1rem;
 }
 
@@ -35,4 +35,17 @@
   color: rgb(143, 140, 140);
   word-wrap: break-word;
   max-width: 7rem;
+}
+
+@media (max-width: 900px) {
+  .actors {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0rem 2.2rem;
+  }
+
+  .sectionTitle {
+    text-align: center;
+  }
 }

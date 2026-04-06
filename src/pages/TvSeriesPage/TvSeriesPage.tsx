@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import type { ItvSeries } from "../../types/tvSeries";
-import { fetchTvSeries, searchTvSeries } from "../../Requests/RequestsTv";
-import Search from "../../assets/Search/Search";
+import {
+  fetchTvSeries,
+  fetchTvSeriesByGenre,
+  searchTvSeries,
+} from "../../Requests/RequestsTv";
+import Search from "../../Components/Search/Search";
 import styles from "../../Components/BrowseSection/browseSection.module.css";
 import BrowseSection from "../../Components/BrowseSection/BrowseSection";
 import Genres, { type Genre } from "../../Components/Genres/Genres";
-import options from "../../helpers";
 
 function TvSeriesPage() {
   const [popularTv, setPopularTv] = useState<ItvSeries[]>([]);
@@ -43,6 +46,10 @@ function TvSeriesPage() {
 
   useEffect(() => {
     const getSearchTvSeries = async () => {
+      if (!searchTv.trim()) {
+        setSearchResultsTv([]);
+        return;
+      }
       const data = await searchTvSeries(searchTv);
 
       setSearchResultsTv(data.results);
@@ -57,16 +64,8 @@ function TvSeriesPage() {
         return;
       }
 
-      const response = await fetch(
-        `https://api.themoviedb.org/3/discover/tv?with_genres=${selectedGenre.id}`,
-        options,
-      );
+      const data = await fetchTvSeriesByGenre(selectedGenre.id);
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch TV series by genre");
-      }
-
-      const data = await response.json();
       setGenreResults(data.results);
     };
 

@@ -1,4 +1,4 @@
-import Star from "../../assets/Star/Star";
+import Star from "../Star/Star";
 import Chip from "../Chip/Chip";
 import styles from "./Details.module.css";
 

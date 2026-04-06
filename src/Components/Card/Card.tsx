@@ -1,4 +1,4 @@
-import Star from "../../assets/Star/Star";
+import Star from "../Star/Star";
 import styles from "./Card.module.css";
 
 type CardProps = {

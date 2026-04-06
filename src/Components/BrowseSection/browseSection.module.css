@@ -54,7 +54,7 @@
   padding-top: 1rem;
   overflow-x: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgb(58, 58, 58) rgb(31, 31, 43, 0.9);
+  scrollbar-color: rgb(58, 58, 58) transparent;
 }
 
 .loading {
