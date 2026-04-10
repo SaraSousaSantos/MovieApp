@@ -6,11 +6,11 @@ import Details from "../../Components/Details/Details";
 import GetCast from "../../Components/Cast/GetCast";
 import GetCrew from "../../Components/Crew/GetCrew";
 
+
 function TvSeriesDetailsPage() {
   const { series_id } = useParams();
 
   const [show, setShow] = useState<ItvSeries | null>(null);
-  
 
   useEffect(() => {
     const fetchTvSeries = async () => {
@@ -24,7 +24,7 @@ function TvSeriesDetailsPage() {
       }
 
       const data = await response.json();
-    
+
       setShow(data);
     };
     fetchTvSeries();
@@ -32,8 +32,8 @@ function TvSeriesDetailsPage() {
 
   return (
     <>
+      
       <Details
-        key={show?.id}
         backdrop={`https://image.tmdb.org/t/p/original${show?.backdrop_path}`}
         image={`https://image.tmdb.org/t/p/w500${show?.poster_path}`}
         name={show?.name}
@@ -42,13 +42,11 @@ function TvSeriesDetailsPage() {
         genres={show?.genres}
         rating={show?.vote_average}
         episode_run_time={show?.episode_run_time}
-        release_date={show?.first_air_date.slice(0, 4)}
+        release_date={show?.first_air_date?.slice(0, 4)}
       ></Details>
 
       <GetCast id={series_id} mediaType="tv" />
       <GetCrew id={series_id} mediaType="tv" />
-
-     
     </>
   );
 }

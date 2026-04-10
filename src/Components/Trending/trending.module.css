@@ -1,0 +1,85 @@
+.container {
+  width: 100%;
+  margin: 4rem auto 0 auto;
+  padding: 0rem 2rem;
+  max-width: 1400px;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.trending {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  position: relative;
+}
+
+.trendingCard {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 8px;
+  position: relative;
+  transition: transform 0.3s ease;
+  transform-origin: bottom center;
+}
+
+.trendingCard:hover {
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+.trendingImage {
+  position: relative;
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.trendingTitle {
+  font-size: 1rem;
+  position: absolute;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2rem;
+}
+
+.dot {
+  width: 10px;
+  height: 8px;
+  border-radius: 999px;
+  background-color: rgb(58, 58, 58);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.active {
+  width: 22px;
+  height: 8px;
+  background-color: rgb(91, 75, 255);
+}
+
+@media (max-width: 900px) {
+  .trending {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .sectionTitle {
+    text-align: center;
+  }
+}

@@ -33,7 +33,6 @@ function MovieDetailsPage() {
   return (
     <>
       <Details
-        key={movie?.id}
         backdrop={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
         image={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
         title={movie?.title}
@@ -42,7 +41,7 @@ function MovieDetailsPage() {
         genres={movie?.genres}
         rating={movie?.vote_average}
         runtime={movie?.runtime}
-        release_date={movie?.release_date.slice(0, 4)}
+        release_date={movie?.release_date?.slice(0, 4)}
       ></Details>
 
       <GetCast id={movie_id} mediaType="movie" />

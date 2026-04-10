@@ -13,7 +13,7 @@ type MediaType = "movie" | "tv";
 
 function GetCrew({ id, mediaType }: GetCrewProps) {
   const [crew, setCrew] = useState<CrewProps[]>([]);
-  console.log("crew", crew);
+
 
   useEffect(() => {
     const fetchCrew = async () => {

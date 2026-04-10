@@ -14,7 +14,7 @@ type MediaType = "movie" | "tv";
 
 function GetCast({ id, mediaType }: GetCastProps) {
   const [cast, setCast] = useState<CastProps[]>([]);
-  console.log("cast", cast);
+  
 
   useEffect(() => {
     const fetchCast = async () => {

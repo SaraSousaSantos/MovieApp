@@ -9,6 +9,7 @@ import Search from "../../Components/Search/Search";
 import styles from "../../Components/BrowseSection/browseSection.module.css";
 import BrowseSection from "../../Components/BrowseSection/BrowseSection";
 import Genres, { type Genre } from "../../Components/Genres/Genres";
+import Trending from "../../Components/Trending/Trending";
 
 function TvSeriesPage() {
   const [popularTv, setPopularTv] = useState<ItvSeries[]>([]);
@@ -50,7 +51,7 @@ function TvSeriesPage() {
         setSearchResultsTv([]);
         return;
       }
-      
+
       const data = await searchTvSeries(searchTv);
 
       setSearchResultsTv(data.results);
@@ -83,6 +84,8 @@ function TvSeriesPage() {
 
   return (
     <>
+      <Trending mediaType="tv" detailsPath="tvSeriesDetailsPage" />
+
       <div className={styles.searchArea}>
         <div className={styles.searchBar}>
           <Search className={styles.icon} />

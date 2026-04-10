@@ -9,6 +9,7 @@ import Search from "../../Components/Search/Search";
 import styles from "../../Components/BrowseSection/browseSection.module.css";
 import BrowseSection from "../../Components/BrowseSection/BrowseSection";
 import Genres, { type Genre } from "../../Components/Genres/Genres";
+import Trending from "../../Components/Trending/Trending";
 
 function MoviesPage() {
   const [popular, setPopular] = useState<Imovie[]>([]);
@@ -81,6 +82,8 @@ function MoviesPage() {
 
   return (
     <>
+      <Trending mediaType="movie" detailsPath="movieDetailsPage" />
+
       <div className={styles.searchArea}>
         <div className={styles.searchBar}>
           <Search className={styles.icon} />
