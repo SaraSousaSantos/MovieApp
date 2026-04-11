@@ -14,23 +14,28 @@ type MediaType = "movie" | "tv";
 
 function GetCast({ id, mediaType }: GetCastProps) {
   const [cast, setCast] = useState<CastProps[]>([]);
-  
 
   useEffect(() => {
     const fetchCast = async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/${mediaType}/${id}/credits`,
-        options,
-      );
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/${mediaType}/${id}/credits`,
+          options,
+        );
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch Cast");
+        if (!response.ok) {
+          throw new Error("Failed to fetch Cast");
+        }
+
+        const data = await response.json();
+
+        setCast(data.cast);
+      } catch (error) {
+        console.error("Error fetching cast:", error);
+        setCast([]);
       }
-
-      const data = await response.json();
-  
-      setCast(data.cast);
     };
+
     fetchCast();
   }, [mediaType, id]);
 

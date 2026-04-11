@@ -38,6 +38,8 @@ function MoviesPage() {
         setTopRated(topRated.results);
         setNowPlaying(nowPlaying.results);
         setUpcoming(upcoming.results);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
       } finally {
         setIsLoadingMovies(false);
       }
@@ -52,10 +54,15 @@ function MoviesPage() {
         return;
       }
 
-      const data = await searchMovies(search);
-
-      setSearchResults(data.results);
+      try {
+        const data = await searchMovies(search);
+        setSearchResults(data.results);
+      } catch (error) {
+        console.error("Error searching movies:", error);
+        setSearchResults([]);
+      }
     };
+
     getSearchMovies();
   }, [search]);
 
@@ -65,8 +72,14 @@ function MoviesPage() {
         setGenreResults([]);
         return;
       }
-      const data = await fetchMoviesByGenre(selectedGenre.id);
-      setGenreResults(data.results);
+
+      try {
+        const data = await fetchMoviesByGenre(selectedGenre.id);
+        setGenreResults(data.results);
+      } catch (error) {
+        console.error("Error fetching movies by genre:", error);
+        setGenreResults([]);
+      }
     };
 
     getMoviesByGenre();
@@ -94,6 +107,7 @@ function MoviesPage() {
             value={search}
             onChange={(event) => {
               setSearch(event.target.value);
+              setSelectedGenre(null);
             }}
           />
         </div>
@@ -102,7 +116,10 @@ function MoviesPage() {
       <Genres
         mediaType="movie"
         selectedGenre={selectedGenre}
-        onClickedGenre={setSelectedGenre}
+        onClickedGenre={(genre) => {
+          setSelectedGenre(genre);
+          setSearch("");
+        }}
       />
 
       {search ? (
@@ -113,7 +130,7 @@ function MoviesPage() {
         />
       ) : selectedGenre !== null ? (
         <BrowseSection
-          sectionTitle={`${selectedGenre?.name} Movies`}
+          sectionTitle={`${selectedGenre.name} Movies`}
           items={genreResults}
           detailsPath="movieDetailsPage"
         />

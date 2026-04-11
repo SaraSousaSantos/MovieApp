@@ -8,26 +8,29 @@ import GetCrew from "../../Components/Crew/GetCrew";
 
 function MovieDetailsPage() {
   const { movie_id } = useParams();
-  
+
   const [movie, setMovie] = useState<Imovie | null>(null);
-  
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movie_id}`,
-        options,
-      );
+    const fetchMovie = async () => {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movie_id}`,
+          options,
+        );
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch Movie Details");
+        if (!response.ok) {
+          throw new Error("Failed to fetch Movie Details");
+        }
+
+        const data = await response.json();
+        setMovie(data);
+      } catch (error) {
+        console.error("Error fetching movie details:", error);
       }
-
-      const data = await response.json();
-    
-      setMovie(data);
     };
-    fetchMovies();
+
+    fetchMovie();
   }, [movie_id]);
 
   return (
@@ -46,8 +49,6 @@ function MovieDetailsPage() {
 
       <GetCast id={movie_id} mediaType="movie" />
       <GetCrew id={movie_id} mediaType="movie" />
-
-    
     </>
   );
 }

@@ -26,17 +26,22 @@ function Trending({ mediaType, detailsPath }: TrendingProps) {
 
   useEffect(() => {
     const fetchTrending = async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/trending/${mediaType}/day`,
-        options,
-      );
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/trending/${mediaType}/day`,
+          options,
+        );
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch Trending");
+        if (!response.ok) {
+          throw new Error("Failed to fetch Trending");
+        }
+
+        const data = await response.json();
+        setTrending(data.results);
+      } catch (error) {
+        console.error("Error fetching trending:", error);
+        setTrending([]);
       }
-
-      const data = await response.json();
-      setTrending(data.results);
     };
     fetchTrending();
   }, [mediaType]);

@@ -23,11 +23,11 @@ function TvSeriesPage() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
   const [genreResults, setGenreResults] = useState<ItvSeries[]>([]);
 
-  const [isLoadingMovies, setIsLoadingMovies] = useState<boolean>(false);
+  const [isLoadingTv, setIsLoadingTv] = useState<boolean>(false);
 
   useEffect(() => {
     const getTvSeries = async () => {
-      setIsLoadingMovies(true);
+      setIsLoadingTv(true);
       try {
         const popularTV = await fetchTvSeries("popular");
         const topRatedTV = await fetchTvSeries("top_rated");
@@ -38,8 +38,10 @@ function TvSeriesPage() {
         setTopRatedTv(topRatedTV.results);
         setOnTheAirTv(onTheAirTV.results);
         setAiringTodayTv(airingTodayTV.results);
+      } catch (error) {
+        console.error("Error fetching TV series:", error);
       } finally {
-        setIsLoadingMovies(false);
+        setIsLoadingTv(false);
       }
     };
     getTvSeries();
@@ -52,10 +54,15 @@ function TvSeriesPage() {
         return;
       }
 
-      const data = await searchTvSeries(searchTv);
-
-      setSearchResultsTv(data.results);
+      try {
+        const data = await searchTvSeries(searchTv);
+        setSearchResultsTv(data.results);
+      } catch (error) {
+        console.error("Error searching TV series:", error);
+        setSearchResultsTv([]);
+      }
     };
+
     getSearchTvSeries();
   }, [searchTv]);
 
@@ -66,15 +73,18 @@ function TvSeriesPage() {
         return;
       }
 
-      const data = await fetchTvSeriesByGenre(selectedGenre.id);
-
-      setGenreResults(data.results);
+      try {
+        const data = await fetchTvSeriesByGenre(selectedGenre.id);
+        setGenreResults(data.results);
+      } catch (error) {
+        console.error("Error searching TV series by genre:", error);
+      }
     };
 
     getTvSeriesByGenre();
   }, [selectedGenre]);
 
-  if (isLoadingMovies) {
+  if (isLoadingTv) {
     return (
       <div className={styles.loading}>
         <p> Loading...</p>
@@ -96,6 +106,7 @@ function TvSeriesPage() {
             value={searchTv}
             onChange={(event) => {
               setSearchTv(event.target.value);
+              setSelectedGenre(null);
             }}
           />
         </div>
@@ -104,7 +115,10 @@ function TvSeriesPage() {
       <Genres
         mediaType="tv"
         selectedGenre={selectedGenre}
-        onClickedGenre={setSelectedGenre}
+        onClickedGenre={(genre) => {
+          setSelectedGenre(genre);
+          setSearchTv("");
+        }}
       />
 
       {searchTv ? (
@@ -115,7 +129,7 @@ function TvSeriesPage() {
         />
       ) : selectedGenre !== null ? (
         <BrowseSection
-          sectionTitle={`${selectedGenre?.name} TV Series`}
+          sectionTitle={`${selectedGenre.name} TV Series`}
           items={genreResults}
           detailsPath="tvSeriesDetailsPage"
         />
@@ -134,7 +148,7 @@ function TvSeriesPage() {
           />
 
           <BrowseSection
-            sectionTitle="Now Playing"
+            sectionTitle="On The Air"
             items={onTheAirTv}
             detailsPath="tvSeriesDetailsPage"
           />

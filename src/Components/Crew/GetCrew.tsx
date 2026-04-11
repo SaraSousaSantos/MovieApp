@@ -14,21 +14,25 @@ type MediaType = "movie" | "tv";
 function GetCrew({ id, mediaType }: GetCrewProps) {
   const [crew, setCrew] = useState<CrewProps[]>([]);
 
-
   useEffect(() => {
     const fetchCrew = async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/${mediaType}/${id}/credits`,
-        options,
-      );
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/${mediaType}/${id}/credits`,
+          options,
+        );
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch Cast");
+        if (!response.ok) {
+          throw new Error("Failed to fetch Crew");
+        }
+
+        const data = await response.json();
+
+        setCrew(data.crew);
+      } catch (error) {
+        console.error("Error fetching crew:", error);
+        setCrew([]);
       }
-
-      const data = await response.json();
-
-      setCrew(data.crew);
     };
     fetchCrew();
   }, [mediaType, id]);

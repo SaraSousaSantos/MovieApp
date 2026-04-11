@@ -7,7 +7,7 @@ type DetailsProps = {
   image: string | undefined;
   title?: string | undefined;
   adult: boolean | undefined;
-  genres: genre[] | undefined;
+  genres: Genre[] | undefined;
   rating: number | undefined;
   overview: string | undefined;
   name?: string | undefined;
@@ -16,7 +16,7 @@ type DetailsProps = {
   runtime?: number | null | undefined;
   episode_run_time?: number[] | undefined;
 };
-type genre = {
+type Genre = {
   id: number;
   name: string;
 };

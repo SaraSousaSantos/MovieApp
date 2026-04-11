@@ -12,7 +12,6 @@ function App() {
       <Routes>
         <Route path="/" element={<MoviesPage />} />
         <Route path="/tvSeriesPage" element={<TvSeriesPage />} />
-        <Route path="/MovieDetailsPage" element={<MovieDetailsPage />} />
         <Route
           path="/movieDetailsPage/:movie_id"
           element={<MovieDetailsPage />}

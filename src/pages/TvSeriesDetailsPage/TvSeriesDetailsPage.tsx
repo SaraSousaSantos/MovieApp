@@ -6,7 +6,6 @@ import Details from "../../Components/Details/Details";
 import GetCast from "../../Components/Cast/GetCast";
 import GetCrew from "../../Components/Crew/GetCrew";
 
-
 function TvSeriesDetailsPage() {
   const { series_id } = useParams();
 
@@ -14,25 +13,28 @@ function TvSeriesDetailsPage() {
 
   useEffect(() => {
     const fetchTvSeries = async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/tv/${series_id}`,
-        options,
-      );
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/tv/${series_id}`,
+          options,
+        );
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch Tv Series Details");
+        if (!response.ok) {
+          throw new Error("Failed to fetch Tv Series Details");
+        }
+
+        const data = await response.json();
+        setShow(data);
+      } catch (error) {
+        console.error("Error fetching TV series details:", error);
       }
-
-      const data = await response.json();
-
-      setShow(data);
     };
+
     fetchTvSeries();
   }, [series_id]);
 
   return (
     <>
-      
       <Details
         backdrop={`https://image.tmdb.org/t/p/original${show?.backdrop_path}`}
         image={`https://image.tmdb.org/t/p/w500${show?.poster_path}`}
